@@ -10,6 +10,7 @@ class CurrentIndexProvider with ChangeNotifier {
 
   changeIndex(int newIndex) {
     _currentIndex = newIndex;
+    print('curIndex:$newIndex');
     notifyListeners();
   }
 }
