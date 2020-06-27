@@ -10,6 +10,7 @@ class UserModel {
      age = json['age'];
   }
 
+  //好处就是传递的数据可以为空
   factory UserModel(Map<String,dynamic> mapJson){
     return UserModel._internalInit(mapJson);
   }
