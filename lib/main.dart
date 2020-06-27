@@ -6,6 +6,7 @@ import 'package:flutterduanwu/init/init_helper.dart';
 import 'package:flutterduanwu/pages/expand_page.dart';
 import 'package:flutterduanwu/pages/unlogin_page.dart';
 import 'package:flutterduanwu/provider/cache_provider.dart';
+import 'package:flutterduanwu/utils/nattery_utils.dart';
 
 void main() {
   GlobalInit.init()..then((value) => runApp(MyApp()));
@@ -45,10 +46,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
-
-  int _battery = 0;
-
-  static const platform = const MethodChannel('sample.flutter.io/battery');
+  var _battery = "0";
 
   var list = ["AAA", "BBB", "CCC"];
 
@@ -127,15 +125,14 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   Future<Null> _getBattery() async {
-    var map = {'aaa': 'aaaaa'};
+    var map = {'MapKey': 'MapValue'};
     try {
-      final int result = await platform.invokeMethod('batteryCount', map);
+      var value = await BatteryUtil.getBatteryLevel();
       setState(() {
-        _battery = result;
+        _battery = value;
       });
     } on PlatformException catch (e, s) {
       print(s);
     }
   }
-
 }

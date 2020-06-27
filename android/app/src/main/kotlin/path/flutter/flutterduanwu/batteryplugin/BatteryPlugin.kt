@@ -17,7 +17,7 @@ class BatteryPlugin {
                     MainActivity.METHOD_NAME -> {
                         when (getBattteryLevel()) {
                             10 -> {
-                                result.success(10)
+                                result.success("10${call.arguments}")
                             }
                             -1 -> {
                                 result.error("UNKNOW_BATTERY", "error", "details")
