@@ -1,7 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterduanwu/dialog/custom_dialog.dart';
+import 'package:flutterduanwu/init/init_helper.dart';
+import 'package:flutterduanwu/pages/expand_page.dart';
+import 'package:flutterduanwu/pages/unlogin_page.dart';
+import 'package:flutterduanwu/provider/cache_provider.dart';
 
 void main() {
-  runApp(MyApp());
+  GlobalInit.init()..then((value) => runApp(MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -11,22 +17,18 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
-        // This makes the visual density adapt to the platform that you run
-        // the app on. For desktop platforms, the controls will be smaller and
-        // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
+      routes: {ExpandPage.ROUTE_NAME: (_) => ExpandPage()},
+      onGenerateRoute: (RouteSettings settings) {
+        String routeName = settings.name;
+        print('RouteName:$routeName');
+        return MaterialPageRoute(builder: (context) {
+          return UnLoginPage();
+        });
+      },
     );
   }
 }
@@ -49,16 +51,22 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin {
   int _counter = 0;
+
+  var list = ["AAA", "BBB", "CCC"];
+
+  TabController _tabController;
+
+  @override
+  void initState() {
+    _tabController = TabController(length: list.length, vsync: this);
+    super.initState();
+  }
 
   void _incrementCounter() {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
       _counter++;
     });
   }
@@ -76,42 +84,53 @@ class _MyHomePageState extends State<MyHomePage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
+        bottom: TabBar(
+            controller: _tabController,
+            tabs: list.map((e) => Tab(text: e)).toList()),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
+      body: TabBarView(
+          controller: _tabController,
+          children: list
+              .map(
+                (e) => GestureDetector(
+                  onTap: _startJump,
+                  child: Column(
+                      children: [
+                        Text('one'),
+                        LimitedBox(
+                          maxWidth: 300,
+                          maxHeight: 300,
+                          child: Text('LimitBox'),
+                        ),
+                        Expanded(child: Container(
+                          color: Colors.blue,
+                          child: Text('Container'),
+                        ))
+                      ],
+                  )
+                ),
+              )
+              .toList()),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  void _performPop() {
+    Navigator.of(context).pop();
+  }
+
+  void _startJump() {
+    var argName = {"name": "ZB", "age": 27};
+//    Navigator.of(context).pushNamed(ExpandPage.ROUTE_NAME, arguments: argName);
+    var widgetList = [
+      Row(
+        children: [Flexible(child: Text('title')), Icon(Icons.close)],
+      ),
+    ];
+    showCustomDialog(context, '这是标题', widgetList);
   }
 }
