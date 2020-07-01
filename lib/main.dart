@@ -1,26 +1,37 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutterduanwu/dialog/custom_dialog.dart';
 import 'package:flutterduanwu/init/init_helper.dart';
 import 'package:flutterduanwu/pages/expand_page.dart';
 import 'package:flutterduanwu/pages/index/car_category.dart';
 import 'package:flutterduanwu/pages/index/home_page.dart';
-import 'package:flutterduanwu/pages/index/home_page_widget.dart';
 import 'package:flutterduanwu/pages/index/mine_page.dart';
 import 'package:flutterduanwu/pages/unlogin_page.dart';
-import 'package:flutterduanwu/provider/cache_provider.dart';
 import 'package:flutterduanwu/provider/currentIndex.dart';
-import 'package:flutterduanwu/provider/global_provider.dart';
 import 'package:flutterduanwu/provider/user_provider.dart';
-import 'package:flutterduanwu/utils/nattery_utils.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   var multiProvider = [UserProvider.instance, CurrentIndexProvider.instance];
-  GlobalInit.init()..then((value) => runApp(MyApp()));
+//  GlobalInit.init()..then((value) => runApp(MyApp()));
+    [1,2,3,4,5,3,2].forEach((element) {
+      var errorMsg = getMemberTips(element);
+      print(errorMsg);
+    });
 }
+
+String getMemberTips(int state) {
+  switch (state) {
+    case 1:
+    case 3:
+      return '"您已是骑手会员，请勿重复购买';
+    case 2:
+    case 4:
+      return "您已是尊享会员，请勿重复购买";
+    default:
+      return "Default Value";
+  }
+}
+
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -111,4 +122,7 @@ class _MyHomePageState extends State<MyHomePage>
     Provider.of<CurrentIndexProvider>(context, listen: false)
         .changeIndex(value);
   }
+
+
 }
+

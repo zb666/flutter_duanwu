@@ -27,6 +27,15 @@ class MinePage extends StatelessWidget {
           ),
           Column(
             children: _generateItem(_itemList),
+          ),
+          Row(
+            children: [
+              Text('Left Title'),
+              Expanded(child: Container(
+                color: Colors.red,
+                child: Center(child: Text('Center')),
+              ))
+            ],
           )
         ],
       ),

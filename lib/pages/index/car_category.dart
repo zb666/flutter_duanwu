@@ -28,14 +28,28 @@ class _CarCategoryPageState extends State<CarCategoryPage> {
               bottom: 0,
               left: 0,
               right: 0,
-              child: Row(
-                children: [
-                  Text('去购物'),
-                  Expanded(
+              child: Container(
+                color: Colors.white,
+                height: 50,
+                child: Row(
+                  children: [
+                    Container(margin: EdgeInsets.all(10), child: Text('购物车')),
+                    Flexible(
                       child: Container(
-                    color: Colors.red,
-                  ))
-                ],
+                        alignment: Alignment.center,
+                        color: Colors.red,
+                        child: Text('11111'),
+                      ),
+                    ),
+                    Flexible(
+                      child: Container(
+                        alignment: Alignment.center,
+                        color: Colors.yellow,
+                        child: Text('22222'),
+                      ),
+                    )
+                  ],
+                ),
               ))
         ],
       ),

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -10,13 +11,14 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
-    with AutomaticKeepAliveClientMixin {
+class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
   int page = 1;
 
   List<Map> goodsList = [];
 
   List<String> itemList = ["1", "2", "3", "4", "5", "6"];
+
+  var streamController = StreamController<List<String>>();
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,10 @@ class _HomePageState extends State<HomePage>
                 (dataJson['data']['slides'] as List).cast();
             return EasyRefresh(
                 child: ListView(
-              children: [SwipeDiy(swiperDataList: swiperDataList)],
+              children: [
+                SwipeDiy(swiperDataList: swiperDataList),
+
+              ],
             ));
           } else {
             return Text('加载中');
@@ -44,4 +49,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   bool get wantKeepAlive => true;
+
 }
+
+
