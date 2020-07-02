@@ -30,22 +30,17 @@ class C implements A{
 
   @override
   void a() {
-    // TODO: implement a
   }
 
   @override
   abs() {
-    // TODO: implement abs
-    throw UnimplementedError();
   }
 
   @override
   void b() {
-    // TODO: implement b
   }
 
 }
-
 
 class D{
   d(){

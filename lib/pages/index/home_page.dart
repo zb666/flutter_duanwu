@@ -36,7 +36,6 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                 child: ListView(
               children: [
                 SwipeDiy(swiperDataList: swiperDataList),
-
               ],
             ));
           } else {

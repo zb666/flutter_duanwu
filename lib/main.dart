@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterduanwu/init/init_helper.dart';
@@ -12,11 +14,36 @@ import 'package:provider/provider.dart';
 
 void main() {
   var multiProvider = [UserProvider.instance, CurrentIndexProvider.instance];
-//  GlobalInit.init()..then((value) => runApp(MyApp()));
-    [1,2,3,4,5,3,2].forEach((element) {
-      var errorMsg = getMemberTips(element);
-      print(errorMsg);
-    });
+  GlobalInit.init()..then((value) => runApp(MyApp()));
+  [1, 2, 3, 4, 5, 3, 2].forEach((element) {
+    var errorMsg = getMemberTips(element);
+    print(errorMsg);
+  });
+
+  var demo = ChainTest()
+    ..name = 'Bob'
+    ..age = 1;
+
+  print(demo.toString());
+
+
+}
+
+
+
+class ChainTest {
+  var name = '';
+  var age = 123;
+
+  @override
+  String toString() {
+    return 'ChainTest{name: $name, age: $age}';
+  }
+
+}
+
+class DemoStream{
+
 }
 
 String getMemberTips(int state) {
@@ -32,7 +59,6 @@ String getMemberTips(int state) {
   }
 }
 
-
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
 
@@ -40,6 +66,7 @@ class MyApp extends StatelessWidget {
     initDio();
   }
 
+  //上下文BuildContext
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -122,7 +149,4 @@ class _MyHomePageState extends State<MyHomePage>
     Provider.of<CurrentIndexProvider>(context, listen: false)
         .changeIndex(value);
   }
-
-
 }
-
