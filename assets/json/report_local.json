@@ -1,0 +1,120 @@
+﻿{
+    "headImage": "",
+    "name": "",
+    "reportTitle": "",
+    "reportTime": "",
+    "perActivity": 0,
+    "perCalmness": 0,
+    "perRelax": 0,
+    "perDeepRelax": 0,
+    "reportDuration": 0,
+    "reportHistoryData": [],
+    "reportDataStatisticsTitle": "您本次的正念能力数据统计",
+    "reportDataContent": [
+        {
+            "title": "偏离/回复",
+            "needQuestion": true,
+            "questionDetail": [
+                {
+                    "imageName": "",
+                    "title": "",
+                    "subTitle": "偏离指在正念冥想过程中思绪受到干扰，脱离正念状态（即正念指数降到60以下）；回复指经过调整，重新回到正念状态（即正念指数达到60及以上）及以上。"
+                 },
+                {
+                    "imageName": "assets/images/ic_report_number.svg",
+                    "title": "回复次数",
+                    "subTitle": "一次回复就意味着一次从受到干扰的状态回复到正念状态的过程。如果您的回复次数低，且能长时间保持在正念状态，说明您此次正念冥想效果较好；如果您的回复次数高，说明您具备及时察觉到干扰并进行调整的能力"
+                },
+                {
+                    "imageName": "assets/images/ic_report_time.svg",
+                    "title": "回复所需时间",
+                    "subTitle": "指在正念冥想过程中，每次出现偏离（思绪受到干扰或走神）时，您需要平均花费多长时间才能够回到正念状态，所需时间越短越好"
+                },
+                {
+                    "imageName": "assets/images/ic_report_level.svg",
+                    "title": "平均偏离程度",
+                    "subTitle": "指在正念冥想过程中，每次出现偏离（思绪受到干扰或走神）时您的正念指数，与进入正念状态的正念指数（即60）的平均差值，平均偏离程度越低越好"
+                }
+            ],
+            "subTitle": "",
+            "contentMessage": "",
+            "needConentMessageShadow": false,
+            "content": [
+                {
+                    "image": "assets/images/ic_report_number.svg",
+                    "title": "0",
+                    "subTitle": "",
+                    "helpMsg": "回复次数"
+                },
+                {
+                    "image": "assets/images/ic_report_time.svg",
+                    "title": "0秒",
+                    "subTitle": "",
+                    "helpMsg": "回复所需时间"
+                },
+                {
+                    "image": "assets/images/ic_report_level.svg",
+                    "title": "0",
+                    "subTitle": "",
+                    "helpMsg": "平均偏离程度"
+                }
+            ]
+        },
+        {
+            "title": "正念状态统计",
+            "needQuestion": false,
+            "questionDetail": [],
+            "subTitle": "正念指数达到60及以上即为正念状态",
+            "contentMessage": "本次练习您未进入优质正念状态，\n继续努力，达到更深层次的放松！",
+            "needConentMessageShadow": false,
+            "content": [
+                {
+                    "image": "",
+                    "title": "0秒",
+                    "subTitle": "耗时",
+                    "helpMsg": "首次进入正念状态\n所花费时长"
+                },
+                {
+                    "image": "",
+                    "title": "0秒",
+                    "subTitle": "最佳表现",
+                    "helpMsg": "最长一次保持\n正念状态的时长"
+                },
+                {
+                    "image": "",
+                    "title": "0秒",
+                    "subTitle": "平均时长",
+                    "helpMsg": "多次保持正念状态\n的平均时长"
+                }
+            ]
+        },
+        {
+            "title": "最佳正念表现",
+            "needQuestion": false,
+            "questionDetail": [],
+            "subTitle": "本次冥想您的正念指数最大值",
+            "contentMessage": "0",
+            "needConentMessageShadow": false,
+            "content": []
+        }
+    ],
+    "zoneIn": {
+        "title": "入定时长",
+        "content": "0秒",
+        "bottomMsg": "恭喜你，你在本次冥想中成功\n进入了入定状态！",
+        "explain": "进入入定状态说明你进入了深层次的放松阶段，这对于缓解压力、疲劳、提升创造力都是非常有帮助的",
+        "image": "assets/images/ic_report_diadema.svg"
+    },
+    "qualityEvaluationTitle": "您本次的正念质量评估",
+    "qualityEvaluationContent": [
+        {
+            "value": 0.01,
+            "title": "减压指数"
+        },
+        {
+            "value": 0.01,
+            "title": "专注力恢复指数"
+        }
+    ],
+    "reportBottomTitle": "更好的放松是为了更好的专注"
+}

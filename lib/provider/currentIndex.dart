@@ -13,4 +13,5 @@ class CurrentIndexProvider with ChangeNotifier {
     print('curIndex:$newIndex');
     notifyListeners();
   }
+
 }

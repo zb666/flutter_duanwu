@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterduanwu/init/init_helper.dart';
+import 'package:flutterduanwu/model/provider/count_model.dart';
 import 'package:flutterduanwu/pages/expand_page.dart';
 import 'package:flutterduanwu/pages/index/car_category.dart';
 import 'package:flutterduanwu/pages/index/home_page.dart';
@@ -13,8 +14,13 @@ import 'package:flutterduanwu/provider/user_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  var multiProvider = [UserProvider.instance, CurrentIndexProvider.instance];
-  GlobalInit.init()..then((value) => runApp(MyApp()));
+  GlobalInit.init()
+    ..then((value) => runApp(MultiProvider(providers: [
+          ChangeNotifierProvider(create: (_) => UserProvider.instance),
+          ChangeNotifierProvider(create: (_) => CurrentIndexProvider.instance),
+          ChangeNotifierProvider(create: (_) => CounterModelProvider.instance),
+        ], child: MyApp())));
+
   [1, 2, 3, 4, 5, 3, 2].forEach((element) {
     var errorMsg = getMemberTips(element);
     print(errorMsg);
@@ -25,11 +31,7 @@ void main() {
     ..age = 1;
 
   print(demo.toString());
-
-
 }
-
-
 
 class ChainTest {
   var name = '';
@@ -39,12 +41,9 @@ class ChainTest {
   String toString() {
     return 'ChainTest{name: $name, age: $age}';
   }
-
 }
 
-class DemoStream{
-
-}
+class DemoStream {}
 
 String getMemberTips(int state) {
   switch (state) {
@@ -69,27 +68,22 @@ class MyApp extends StatelessWidget {
   //上下文BuildContext
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-        providers: [
-          ChangeNotifierProvider.value(value: UserProvider.instance),
-          ChangeNotifierProvider.value(value: CurrentIndexProvider.instance),
-        ],
-        child: MaterialApp(
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-          ),
-          home: MyHomePage(title: 'Flutter Demo Home Page'),
-          routes: {ExpandPage.ROUTE_NAME: (_) => ExpandPage()},
-          onGenerateRoute: (RouteSettings settings) {
-            String routeName = settings.name;
-            print('RouteName:$routeName');
-            return MaterialPageRoute(builder: (context) {
-              return UnLoginPage();
-            });
-          },
-        ));
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      routes: {ExpandPage.ROUTE_NAME: (_) => ExpandPage()},
+      onGenerateRoute: (RouteSettings settings) {
+        String routeName = settings.name;
+        print('RouteName:$routeName');
+        return MaterialPageRoute(builder: (context) {
+          return UnLoginPage();
+        });
+      },
+    );
   }
 }
 

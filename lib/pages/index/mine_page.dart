@@ -11,7 +11,6 @@ class MinePage extends StatelessWidget {
       body: ListView(
         children: [
           Center(
-            widthFactor: 1,
             child: Container(
               height: 100,
               color: Colors.lightBlueAccent,
@@ -36,6 +35,11 @@ class MinePage extends StatelessWidget {
                 child: Center(child: Text('Center')),
               ))
             ],
+          ),
+          Align(
+            alignment: Alignment.topRight,
+            child: Container(
+                child: Text('aaaaa')),
           )
         ],
       ),
