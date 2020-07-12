@@ -8,9 +8,12 @@ import 'package:flutterduanwu/pages/expand_page.dart';
 import 'package:flutterduanwu/pages/index/car_category.dart';
 import 'package:flutterduanwu/pages/index/home_page.dart';
 import 'package:flutterduanwu/pages/index/mine_page.dart';
+import 'package:flutterduanwu/pages/index/selector_page.dart';
+import 'package:flutterduanwu/pages/provider/common_modify_provider.dart';
 import 'package:flutterduanwu/pages/unlogin_page.dart';
 import 'package:flutterduanwu/provider/currentIndex.dart';
 import 'package:flutterduanwu/provider/user_provider.dart';
+import 'package:flutterduanwu/testFile.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -19,6 +22,7 @@ void main() {
           ChangeNotifierProvider(create: (_) => UserProvider.instance),
           ChangeNotifierProvider(create: (_) => CurrentIndexProvider.instance),
           ChangeNotifierProvider(create: (_) => CounterModelProvider.instance),
+          ChangeNotifierProvider(create: (_) => CommonModifyProvider.instance),
         ], child: MyApp())));
 
   [1, 2, 3, 4, 5, 3, 2].forEach((element) {
@@ -31,6 +35,19 @@ void main() {
     ..age = 1;
 
   print(demo.toString());
+
+  Future.microtask(() => null);
+
+
+  buildHouse('aa',10,'sex');
+//  buildHouse(10);
+
+//  buildHouse('aaa','sex');
+
+}
+
+void buildHouse(String name,[int age,String sex]){
+  print('$name $age $sex');
 }
 
 class ChainTest {
@@ -102,7 +119,7 @@ class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
   var _battery = "0";
 
-  var list = ["首页", "分类", "购物车", "会员中心"];
+  var list = ["首页", "分类", "购物车", "会员中心","选择器"];
 
   final List<BottomNavigationBarItem> bottomTabs = [
     BottomNavigationBarItem(icon: Icon(CupertinoIcons.home), title: Text('首页')),
@@ -112,9 +129,11 @@ class _MyHomePageState extends State<MyHomePage>
         icon: Icon(CupertinoIcons.shopping_cart), title: Text('购物车')),
     BottomNavigationBarItem(
         icon: Icon(CupertinoIcons.profile_circled), title: Text('会员中心')),
+    BottomNavigationBarItem(
+        icon: Icon(CupertinoIcons.reply), title: Text('选择器')),
   ];
 
-  final _pageList = [HomePage(), MinePage(), CarCategoryPage(), MinePage()];
+  final _pageList = [HomePage(), MinePage(), CarCategoryPage(), MinePage(),SelectorPage()];
 
   @override
   void initState() {

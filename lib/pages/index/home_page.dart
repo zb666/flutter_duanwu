@@ -27,8 +27,8 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     var formData = {'lon': '115.02932', 'lat': '35.76189'};
-
     return Scaffold(
       appBar: AppBar(title: Text('百姓生活')),
       body: ListView(

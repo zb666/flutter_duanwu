@@ -6,6 +6,8 @@ import 'package:flutterduanwu/model/provider/count_model.dart';
 import 'package:flutterduanwu/service/service_method.dart';
 import 'package:provider/provider.dart';
 
+import '../../testFile.dart';
+
 class CarCategoryPage extends StatefulWidget {
   @override
   _CarCategoryPageState createState() => _CarCategoryPageState();
@@ -17,11 +19,20 @@ class _CarCategoryPageState extends State<CarCategoryPage> {
 
   List list = [];
 
+  GlobalKey<_CarCategoryPageState> globalKey = new GlobalKey();
+
+
   @override
   void initState() {
     super.initState();
     _getCategory();
-    print('---initState---');
+    print('---CarCategoryPage initState--- $context  ${context == null}');
+    Future.delayed(Duration(seconds: 0),(){
+
+    });
+    var dio = DioTest();
+    var dio2 = DioTest();
+    print('Result: ${identical(dio2, dio)}');
   }
 
   @override
@@ -38,6 +49,7 @@ class _CarCategoryPageState extends State<CarCategoryPage> {
         ),
       ),
       body: Stack(
+        key: globalKey,
         children: [
           ListView.builder(
               itemCount: 20,
@@ -45,7 +57,7 @@ class _CarCategoryPageState extends State<CarCategoryPage> {
                 return UnconstrainedBox(
                   child: Container(
                     margin: EdgeInsets.all(10),
-                    width: 380,
+                    width: 350,
                     height: 300,
                     decoration: BoxDecoration(
                       border: Border.all(width: 1,color: Colors.yellow),
@@ -54,7 +66,9 @@ class _CarCategoryPageState extends State<CarCategoryPage> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('title'),
+                        InkWell(child: Text('title'),onTap: (){
+                          globalKey.currentState._getCategory();
+                        },),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
