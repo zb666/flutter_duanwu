@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterduanwu/init/init_helper.dart';
 import 'package:flutterduanwu/model/provider/count_model.dart';
 import 'package:flutterduanwu/pages/expand_page.dart';
+import 'package:flutterduanwu/pages/hero_image.dart';
 import 'package:flutterduanwu/pages/index/car_category.dart';
 import 'package:flutterduanwu/pages/index/home_page.dart';
 import 'package:flutterduanwu/pages/index/mine_page.dart';
@@ -38,15 +39,13 @@ void main() {
 
   Future.microtask(() => null);
 
-
-  buildHouse('aa',10,'sex');
+  buildHouse('aa', 10, 'sex');
 //  buildHouse(10);
 
 //  buildHouse('aaa','sex');
-
 }
 
-void buildHouse(String name,[int age,String sex]){
+void buildHouse(String name, [int age, String sex]) {
   print('$name $age $sex');
 }
 
@@ -92,7 +91,10 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
-      routes: {ExpandPage.ROUTE_NAME: (_) => ExpandPage()},
+      routes: {
+        ExpandPage.ROUTE_NAME: (_) => ExpandPage(),
+        HeroImageWidget.ROUTE_NAME: (_) => HeroImageWidget()
+      },
       onGenerateRoute: (RouteSettings settings) {
         String routeName = settings.name;
         print('RouteName:$routeName');
@@ -119,7 +121,7 @@ class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
   var _battery = "0";
 
-  var list = ["首页", "分类", "购物车", "会员中心","选择器"];
+  var list = ["首页", "分类", "购物车", "会员中心", "选择器"];
 
   final List<BottomNavigationBarItem> bottomTabs = [
     BottomNavigationBarItem(icon: Icon(CupertinoIcons.home), title: Text('首页')),
@@ -133,7 +135,13 @@ class _MyHomePageState extends State<MyHomePage>
         icon: Icon(CupertinoIcons.reply), title: Text('选择器')),
   ];
 
-  final _pageList = [HomePage(), MinePage(), CarCategoryPage(), MinePage(),SelectorPage()];
+  final _pageList = [
+    HomePage(),
+    MinePage(),
+    CarCategoryPage(),
+    MinePage(),
+    SelectorPage()
+  ];
 
   @override
   void initState() {

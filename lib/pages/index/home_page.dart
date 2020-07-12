@@ -8,6 +8,8 @@ import 'package:flutterduanwu/pages/common/common_image.dart';
 import 'package:flutterduanwu/pages/index/home_page_widget.dart';
 import 'package:flutterduanwu/service/service_method.dart';
 
+import '../hero_image.dart';
+
 class HomePage extends StatefulWidget {
   bool isExpand = false;
 
@@ -36,6 +38,12 @@ class _HomePageState extends State<HomePage>
         children: [
           Column(
             children: [
+              InkWell(
+                  onTap: ()=>Navigator.of(context).pushNamed(HeroImageWidget.ROUTE_NAME),
+                  child: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: Hero(tag: 'commonTag', child:Image.asset('assets/images/background_report.webp')))),
               CommonImage.asset('assets/images/ic_report_diadema.svg'),
               Container(
                 margin: EdgeInsets.only(top: 30),
