@@ -47,6 +47,10 @@ void main() {
 
   print('---start---$_dateTime');
 
+  Future.delayed(Duration(seconds: 2));
+
+  print('--end test--');
+
   Future.wait([getAA(),getBBB()]).then((value) {
     print('---end---$_dateTime value:$value');
   }).catchError((e) {
@@ -65,7 +69,17 @@ void main() {
   print(++count);
   print(count);
 
+
+  asyncTest();
+
 //  Isolate.spawn((message) { }, message);
+}
+
+void asyncTest() async{
+  print('start AAA$_dateTime');
+  await Future.delayed(Duration(seconds: 3));
+  print('start AAAAA $_dateTime');
+  Future.delayed(Duration(seconds: 2)).then((value) => print('start BBB $_dateTime'));
 }
 
 Future<String> getAA() async{

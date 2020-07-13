@@ -4,7 +4,14 @@ import 'package:flutterduanwu/pages/mine/mine_item.dart';
 import '../hero_image.dart';
 
 class MinePage extends StatelessWidget {
-  List<String> _itemList = ['优惠券', '会员中心', '历史记录'];
+
+  List<String> get _itemList {
+    return ['优惠券', '会员中心', '历史记录'];
+  }
+
+  set itemList(List<String> list){
+    itemList = list;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +43,9 @@ class MinePage extends StatelessWidget {
                 Text('Left Title'),
                 Expanded(
                     child: Container(
-                  color: Colors.red,
-                  child: Center(child: Text('Center')),
-                ))
+                      color: Colors.red,
+                      child: Center(child: Text('Center')),
+                    ))
               ],
             ),
             Align(
@@ -55,9 +62,9 @@ class MinePage extends StatelessWidget {
                     Navigator.of(context).pushNamed(HeroImageWidget.ROUTE_NAME),
                 child: Center(
                     child: Text(
-                  '点击进行跳转',
-                  style: TextStyle(fontSize: 30, color: Colors.greenAccent),
-                )))
+                      '点击进行跳转',
+                      style: TextStyle(fontSize: 30, color: Colors.greenAccent),
+                    )))
           ],
         ),
       ),
@@ -67,4 +74,4 @@ class MinePage extends StatelessWidget {
   _generateItem(List<String> itemList) {
     return itemList.map((e) => MineItem(title: e)).toList();
   }
-}
+}}

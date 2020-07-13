@@ -27,6 +27,8 @@ public class MethodChannelPlugin implements MethodChannel.MethodCallHandler {
         MethodChannel methodChannel = new MethodChannel(flutterView,"startRecord");
         MethodChannelPlugin instance = new MethodChannelPlugin((Activity) flutterView.getContext());
         methodChannel.setMethodCallHandler(instance);
+
+
     }
 
     @Override
