@@ -74,4 +74,4 @@ class MinePage extends StatelessWidget {
   _generateItem(List<String> itemList) {
     return itemList.map((e) => MineItem(title: e)).toList();
   }
-}}
+}

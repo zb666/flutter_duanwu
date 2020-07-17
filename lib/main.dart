@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:isolate';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +44,26 @@ void main() {
 //  buildHouse(10);
 
 //  buildHouse('aaa','sex');
+
+    startSpawn();
+
+}
+
+void startSpawn() async{
+
+  final receive = ReceivePort();
+
+  Isolate isolate = await Isolate.spawn(runTimer, receive.sendPort);
+  receive.listen((message) {
+    //ReceivePort将自己的发射器发送出去，让对方可以拿着自己的发射器发送消息，
+    //然后可以在自己的ReceivePort的Listen回调中获取到该数据
+    print('receive data from $message');
+  });
+
+}
+
+void runTimer(SendPort sendPort){
+  sendPort.send('notification message');
 }
 
 void buildHouse(String name, [int age, String sex]) {

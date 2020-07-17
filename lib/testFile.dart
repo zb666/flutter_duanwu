@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:isolate';
 
 import 'package:dio/dio.dart';
+import 'package:flutterduanwu/immutabletest/immu_test.dart';
 
 void main() {
   var map = {"a": "aaa", "b": "bbb"};
@@ -40,10 +41,10 @@ void main() {
   var dioRun = DioRun();
   var dioRun2 = DioRun();
   print(identical(dioRun, dioRun2));
-//
-//  Future.delayed(Duration(seconds: 1))
-//      .then((value) => null, onError: () {})
-//      .catchError(() {});
+
+  Future.delayed(Duration(seconds: 1))
+      .then((value) => null, onError: () {})
+      .catchError(() {});
 
   print('---start---$_dateTime');
 
@@ -73,6 +74,8 @@ void main() {
   asyncTest();
 
 //  Isolate.spawn((message) { }, message);
+
+   Son son = Son(10, 20);
 }
 
 void asyncTest() async{
