@@ -1,10 +1,16 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:isolate';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/services.dart';
+import 'package:flutterduanwu/env/env_config.dart';
 import 'package:flutterduanwu/init/init_helper.dart';
+import 'package:flutterduanwu/model/dev_bean.dart';
 import 'package:flutterduanwu/model/provider/count_model.dart';
+import 'package:flutterduanwu/pages/demo/multi_demo_page.dart';
 import 'package:flutterduanwu/pages/expand_page.dart';
 import 'package:flutterduanwu/pages/hero_image.dart';
 import 'package:flutterduanwu/pages/index/car_category.dart';
@@ -15,12 +21,19 @@ import 'package:flutterduanwu/pages/provider/common_modify_provider.dart';
 import 'package:flutterduanwu/pages/unlogin_page.dart';
 import 'package:flutterduanwu/provider/currentIndex.dart';
 import 'package:flutterduanwu/provider/user_provider.dart';
-import 'package:flutterduanwu/testFile.dart';
+import 'package:flutterduanwu/widget/config_wrapper.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async{
+
+   WidgetsFlutterBinding.ensureInitialized();
+
+  var loadString = await rootBundle.loadString('assets/json/config_json.json');
+  var configMap = json.decode(loadString);
+  var configBean = EnvConfig.fromJson(configMap);
+
   GlobalInit.init()
-    ..then((value) => runApp(MultiProvider(providers: [
+    .then((value) => runApp(MultiProvider(providers: [
           ChangeNotifierProvider(create: (_) => UserProvider.instance),
           ChangeNotifierProvider(create: (_) => CurrentIndexProvider.instance),
           ChangeNotifierProvider(create: (_) => CounterModelProvider.instance),
@@ -142,7 +155,7 @@ class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
   var _battery = "0";
 
-  var list = ["首页", "分类", "购物车", "会员中心", "选择器"];
+  var list = ["首页", "分类", "购物车", "会员中心", "选择器",'CustomPage'];
 
   final List<BottomNavigationBarItem> bottomTabs = [
     BottomNavigationBarItem(icon: Icon(CupertinoIcons.home), title: Text('首页')),
@@ -154,6 +167,8 @@ class _MyHomePageState extends State<MyHomePage>
         icon: Icon(CupertinoIcons.profile_circled), title: Text('会员中心')),
     BottomNavigationBarItem(
         icon: Icon(CupertinoIcons.reply), title: Text('选择器')),
+    BottomNavigationBarItem(
+        icon: Icon(CupertinoIcons.battery_75_percent), title: Text('自定义')),
   ];
 
   final _pageList = [
@@ -161,7 +176,8 @@ class _MyHomePageState extends State<MyHomePage>
     MinePage(),
     CarCategoryPage(),
     MinePage(),
-    SelectorPage()
+    SelectorPage(),
+    CustomMultiRenderDemoPage()
   ];
 
   @override

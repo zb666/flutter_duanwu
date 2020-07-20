@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'dart:isolate';
 
 import 'package:dio/dio.dart';
+import 'package:flutterduanwu/env/dev.dart';
 import 'package:flutterduanwu/immutabletest/immu_test.dart';
+import 'package:flutterduanwu/model/dev_bean.dart';
 
 void main() {
   var map = {"a": "aaa", "b": "bbb"};
@@ -52,51 +54,73 @@ void main() {
 
   print('--end test--');
 
-  Future.wait([getAA(),getBBB()]).then((value) {
+  Future.wait([getAA(), getBBB()]).then((value) {
     print('---end---$_dateTime value:$value');
   }).catchError((e) {
     print('error:$e');
   });
 
   print('---Inner---$_dateTime');
-  getAA().then((value){
+  getAA().then((value) {
     print('Inner: $_dateTime');
-    getBBB().then((value){
+    getBBB().then((value) {
       print('Inner: $_dateTime');
     });
-  } );
+  });
 
   var count = 2;
   print(++count);
   print(count);
 
-
   asyncTest();
 
 //  Isolate.spawn((message) { }, message);
 
-   Son son = Son(10, 20);
+  Son son = Son(10, 20);
+
+  dynamic value = 1;
+  print('dynamic:$value');
+  value = "aaa";
+  print('dynamic:$value');
+
+  List<String> list = null;
+  var length = list?.length??2;
+
+  print(length);
+
+  const configJson = {'env': 'dev', 'debug': true};
+
+  var jsonA = json.encode(configJson);
+
+  var a = "{\"env\":\"dev\",\"debug\":true}"; //json串会存在转义
+  print(jsonA);
+
+  var configBean = ConfigBean.fromJson(configJson);
+
+  print('${configBean.env} ${configBean.debug}');
+
 }
 
-void asyncTest() async{
+void asyncTest() async {
   print('start AAA$_dateTime');
   await Future.delayed(Duration(seconds: 3));
   print('start AAAAA $_dateTime');
-  Future.delayed(Duration(seconds: 2)).then((value) => print('start BBB $_dateTime'));
+  Future.delayed(Duration(seconds: 2))
+      .then((value) => print('start BBB $_dateTime'));
 }
 
-Future<String> getAA() async{
+Future<String> getAA() async {
   await Future.delayed(Duration(seconds: 10));
   return "AAA";
 }
 
-Future<bool> getBBB() async{
+Future<bool> getBBB() async {
   await Future.delayed(Duration(seconds: 10));
   return false;
 }
 
 Future<String> getA = Future<String>(() {
-   Future.delayed(Duration(seconds: 5));
+  Future.delayed(Duration(seconds: 5));
   return "AAA";
 });
 
@@ -133,4 +157,4 @@ void _testHttp() async {
   }
 }
 
-DateTime get _dateTime =>DateTime.now();
+DateTime get _dateTime => DateTime.now();

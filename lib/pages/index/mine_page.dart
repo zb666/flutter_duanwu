@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutterduanwu/pages/demo/multi_demo_page.dart';
 import 'package:flutterduanwu/pages/mine/mine_item.dart';
+import 'package:flutterduanwu/pages/multi_widget.dart';
 
 import '../hero_image.dart';
 
@@ -21,6 +23,7 @@ class MinePage extends StatelessWidget {
         child: ListView(
           shrinkWrap: true,
           children: [
+            CustomMultiRenderDemoPage(),
             Center(
               child: Container(
                 height: 100,
@@ -48,15 +51,12 @@ class MinePage extends StatelessWidget {
                     ))
               ],
             ),
-            Align(
-              alignment: Alignment.topRight,
-              child: Container(child: Text('aaaaa')),
-            ),
-            InkWell(
-              onTap: () {
-                Navigator.of(context).pushNamed(HeroImageWidget.ROUTE_NAME);
-              },
-            ),
+//            InkWell(
+//              onTap: () {
+//                Navigator.of(context).pushNamed(HeroImageWidget.ROUTE_NAME);
+//              },
+//            ),
+            MulDemo(),
             InkWell(
                 onTap: () =>
                     Navigator.of(context).pushNamed(HeroImageWidget.ROUTE_NAME),
@@ -64,7 +64,7 @@ class MinePage extends StatelessWidget {
                     child: Text(
                       '点击进行跳转',
                       style: TextStyle(fontSize: 30, color: Colors.greenAccent),
-                    )))
+                    ))),
           ],
         ),
       ),
