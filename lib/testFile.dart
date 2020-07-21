@@ -158,3 +158,45 @@ void _testHttp() async {
 }
 
 DateTime get _dateTime => DateTime.now();
+
+
+class Top{
+  void top(){}
+}
+
+class Bottom{
+  void bottom(){}
+}
+
+class A with Top,Bottom{
+  void aa(){
+    top();
+    bottom();
+  }
+}
+
+abstract class TopC{
+  void testC();
+}
+
+class DDD implements TopC{
+  @override
+  void testC() {
+  }
+}
+
+class DDDD with TopC{
+  @override
+  void testC() {
+    // TODO: implement testC
+  }
+}
+
+mixin MixinDemo on TopC{}
+
+//需要MixinDemo 需要继承Top这个类,因为MixinDemo中强制指定了需要继承这个类才能继承MixinDemo
+class EEE extends TopC with MixinDemo{
+  @override
+  void testC() {
+  }
+}
