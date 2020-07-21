@@ -188,7 +188,6 @@ class DDD implements TopC{
 class DDDD with TopC{
   @override
   void testC() {
-    // TODO: implement testC
   }
 }
 
