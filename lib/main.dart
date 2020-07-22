@@ -1,14 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:isolate';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/services.dart';
 import 'package:flutterduanwu/env/env_config.dart';
 import 'package:flutterduanwu/init/init_helper.dart';
-import 'package:flutterduanwu/model/dev_bean.dart';
 import 'package:flutterduanwu/model/provider/count_model.dart';
 import 'package:flutterduanwu/pages/demo/multi_demo_page.dart';
 import 'package:flutterduanwu/pages/expand_page.dart';
@@ -21,7 +18,6 @@ import 'package:flutterduanwu/pages/provider/common_modify_provider.dart';
 import 'package:flutterduanwu/pages/unlogin_page.dart';
 import 'package:flutterduanwu/provider/currentIndex.dart';
 import 'package:flutterduanwu/provider/user_provider.dart';
-import 'package:flutterduanwu/widget/config_wrapper.dart';
 import 'package:provider/provider.dart';
 
 void main() async{
@@ -47,7 +43,7 @@ void main() async{
 
   var demo = ChainTest()
     ..name = 'Bob'
-    ..age = 1;
+    ..age = 123;
 
   print(demo.toString());
 

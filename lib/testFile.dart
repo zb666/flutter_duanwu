@@ -12,6 +12,8 @@ void main() {
   print(map);
   var result = json.encode(map);
   print(result);
+
+
 //  _testHttp();
 
 //  UserBeanInfo.fromMap(map);

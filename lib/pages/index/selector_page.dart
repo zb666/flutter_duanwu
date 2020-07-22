@@ -11,53 +11,48 @@ class SelectorPage extends StatelessWidget {
 
   final FocusNode _emptyNode2 = FocusNode();
 
+  final list = ['A', 'B', 'C', 'D', 'E'];
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-
-      },
+      onTap: () {},
       child: SafeArea(
         child: ChangeNotifierProvider<CommonModifyProvider>(
           create: (_) => CommonModifyProvider.instance,
           child: OrientationBuilder(
             builder: (context, orientation) {
               return GestureDetector(
-                onTap: ()=>FocusScope.of(context).requestFocus(_emptyNode),
-                child: Stack(
-                  children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: TextField(
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius:BorderRadius.circular(20),
-                                  borderSide: BorderSide(color: Colors.greenAccent,width: 2)
-                              )
-                          )
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: TextField(
-                        focusNode: _focusNode,
-                        controller: _controller,
-                        cursorWidth: 2.0,
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: GestureDetector(
-                          onTap: () =>
-                              FocusScope.of(context).unfocus(),
-                          child: Text('333',style: TextStyle(fontSize: 20),)),
-                    ),
-                    Align(
+                onTap: () => FocusScope.of(context).requestFocus(_emptyNode),
+                child: CustomScrollView(
+                  slivers: [
+                    SliverToBoxAdapter(child: Container(
+                      width: 100,
+                      height: 100,
                       alignment: Alignment.center,
-                      child:
-                          TextField(focusNode: _nextNode, controller: TextEditingController()),
-                    )
+                      child: Text('Title'),
+                    )),
+                    SliverList(delegate: SliverChildListDelegate(
+                      [
+                        Padding(padding: EdgeInsets.all(10)),
+                        SizedBox(child: Text('AAAAA'),height: 100),
+                        Icon(Icons.access_time),
+                        SizedBox(child: Text('BBBBB'),height: 100),
+                        SizedBox(child: Text('CCCCCCCCCCCCCCCCCCCC',textAlign: TextAlign.center),height: 100),
+                      ]
+                    )),
+                    SliverGrid(
+                        delegate: SliverChildBuilderDelegate((context, pos) {
+                          return SizedBox(
+                              width: 100,
+                              height: 100,
+                              child: Center(child: Text('$pos')));
+                        },childCount: 100),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            mainAxisSpacing: 5,
+                            childAspectRatio: 1.0,
+                            crossAxisSpacing: 5))
                   ],
                 ),
               );

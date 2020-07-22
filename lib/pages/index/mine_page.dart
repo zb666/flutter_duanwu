@@ -23,7 +23,6 @@ class MinePage extends StatelessWidget {
         child: ListView(
           shrinkWrap: true,
           children: [
-            CustomMultiRenderDemoPage(),
             Center(
               child: Container(
                 height: 100,
