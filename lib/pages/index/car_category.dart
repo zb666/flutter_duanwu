@@ -14,25 +14,27 @@ class CarCategoryPage extends StatefulWidget {
 }
 
 class _CarCategoryPageState extends State<CarCategoryPage> {
-
   int value = 0;
 
   List list = [];
 
   GlobalKey<_CarCategoryPageState> globalKey = new GlobalKey();
 
-
   @override
   void initState() {
     super.initState();
     _getCategory();
     print('---CarCategoryPage initState--- $context  ${context == null}');
-    Future.delayed(Duration(seconds: 0),(){
-
-    });
+    Future.delayed(Duration(seconds: 0), () {});
     var dio = DioTest();
     var dio2 = DioTest();
     print('Result: ${identical(dio2, dio)}');
+  }
+
+  @override
+  void reassemble() {
+    //Debug模式下状态发生改变
+    super.reassemble();
   }
 
   @override
@@ -43,9 +45,7 @@ class _CarCategoryPageState extends State<CarCategoryPage> {
           color: Colors.red,
           child: Center(
               widthFactor: 3,
-              child: Container(
-                  color: Colors.white30,
-                  child: Text('购物车'))),
+              child: Container(color: Colors.white30, child: Text('购物车'))),
         ),
       ),
       body: Stack(
@@ -56,41 +56,56 @@ class _CarCategoryPageState extends State<CarCategoryPage> {
               itemBuilder: (context, index) {
                 return UnconstrainedBox(
                   child: Container(
-                    margin: EdgeInsets.all(10),
-                    width: 350,
-                    height: 300,
-                    decoration: BoxDecoration(
-                      border: Border.all(width: 1,color: Colors.yellow),
-                      borderRadius: BorderRadius.circular(10)
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        InkWell(child: Text('title'),onTap: (){
-                          globalKey.currentState._getCategory();
-                        },),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(20),
-                              child: Text('start'),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(20),
-                              child: Row(
-                                children: [
-                                  Text('aaa'),
-                                  SizedBox(width: 10),
-                                  Text('bbb')
+                      margin: EdgeInsets.all(10),
+                      width: 350,
+                      height: 300,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.green, width: 2),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          InkWell(
+                            child: Container(
+                              child: Text('title'),
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.red,
+                                      blurRadius: 2.0,
+                                      spreadRadius: 5.0,
+                                      offset: Offset(1.0, 1.0))
                                 ],
+                                color: Colors.blueAccent,
                               ),
-                            )
-                          ],
-                        )
-                      ],
-                    )
-                  ),
+                              padding: EdgeInsets.all(10.0),
+                            ),
+                            onTap: () {
+                              globalKey.currentState._getCategory();
+                            },
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: Text('start'),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: Row(
+                                  children: [
+                                    Text('aaa'),
+                                    SizedBox(width: 10),
+                                    Text('bbb')
+                                  ],
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      )),
                 );
               }),
           Positioned(

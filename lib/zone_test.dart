@@ -7,12 +7,6 @@ void main() {
   FlutterError.onError = (FlutterErrorDetails details) {
     debugPrint('report Error $details'); //
   };
-
-  //zoneSpecification: ZoneSpecification(
-  //        print:(Zone self, ZoneDelegate parent, Zone zone, String line){
-  //          //collectLog
-  //        }
-  //      ),
   runZonedGuarded(() {
     runApp(MyApp());
   }, (Object error, StackTrace stack) {
@@ -23,4 +17,6 @@ void main() {
               Object error, StackTrace stackTrace) {
 
           }));
+
+
 }

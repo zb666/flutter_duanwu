@@ -31,15 +31,18 @@ class _MulDemoState extends State<MulDemo> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: CustomMultiChildLayout(
-          delegate: CustomMultiPageDelegate(),
-          children: widget.layoutId
-              .map((e) => SizedBox(
-                    width: 100,
-                     height: 100,
-                     child: Text(e, style: const TextStyle(color: Colors.greenAccent))
-                  ))
-              .toList()),
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: 300,maxHeight: 500),
+        child: CustomMultiChildLayout(
+            delegate: CustomMultiPageDelegate(),
+            children: widget.layoutId
+                .map((e) => SizedBox(
+                      width: 100,
+                       height: 100,
+                       child: Text(e, style: const TextStyle(color: Colors.greenAccent))
+                    ))
+                .toList()),
+      ),
     );
   }
 }

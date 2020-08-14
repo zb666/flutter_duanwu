@@ -10,6 +10,8 @@ import 'package:flutterduanwu/service/service_method.dart';
 
 import '../hero_image.dart';
 
+typedef Callback = int Function(String name);
+
 class HomePage extends StatefulWidget {
   bool isExpand = false;
 
@@ -28,25 +30,58 @@ class _HomePageState extends State<HomePage>
   var streamController = StreamController<List<String>>();
 
   @override
+  void initState() {
+    super.initState();
+//    streamController.sink.add(event)
+//    streamController.stream.listen((event) {
+//
+//    });
+
+    onResume(1, 'gender', (name) => name.hashCode);
+  }
+
+  void onResume(int name, String gender, Callback callback) {
+    int result = callback.call(gender);
+    print('Result:$name $result');
+  }
+
+  @override
   Widget build(BuildContext context) {
     super.build(context);
     var formData = {'lon': '115.02932', 'lat': '35.76189'};
     return Scaffold(
-      appBar: AppBar(title: Text('百姓生活')),
+      appBar: AppBar(
+          title: Text('百姓生活'),
+          backgroundColor: Theme.of(context).highlightColor),
       body: ListView(
         shrinkWrap: true,
         children: [
+          Chip(
+              label: Text('Label 文字'),
+              backgroundColor: Colors.cyan,
+              avatar: Icon(Icons.clear, color: Colors.black12),
+              labelPadding: EdgeInsets.fromLTRB(2.0, 0.0, 2.0, 0.0),
+          ),
+          AspectRatio(
+              aspectRatio: 16 / 9,
+              child: DecoratedBox(
+                  decoration: BoxDecoration(color: Colors.greenAccent),
+                  child: Center(child: Text('AAA')))),
           Column(
             children: [
               InkWell(
-                  onTap: ()=>Navigator.of(context).pushNamed(HeroImageWidget.ROUTE_NAME),
+                  onTap: () => Navigator.of(context)
+                      .pushNamed(HeroImageWidget.ROUTE_NAME),
                   child: SizedBox(
                       width: 50,
                       height: 50,
-                      child: Hero(tag: 'commonTag', child:Image.asset('assets/images/background_report.webp')))),
+                      child: Hero(
+                          tag: 'commonTag',
+                          child: Image.asset(
+                              'assets/images/background_report.webp')))),
               CommonImage.asset('assets/images/ic_report_diadema.svg'),
               Container(
-                margin: EdgeInsets.only(top: 30),
+                margin: const EdgeInsets.only(top: 30),
                 alignment: Alignment.center,
                 width: MediaQuery.of(context).size.width,
                 height: 200,
@@ -59,6 +94,8 @@ class _HomePageState extends State<HomePage>
                         setState(() {
                           var isExpand = widget.isExpand;
                           widget.isExpand = isExpand;
+                          streamController.sink.add(['1']);
+                          streamController.add(['A', 'B', 'C']);
                         });
                       },
                       child: Text('点击改变')),
@@ -98,23 +135,25 @@ class AnimWidget extends StatefulWidget {
 }
 
 class _AnimWidgetState extends State<AnimWidget> {
-
   bool isFirst = false;
 
   @override
   Widget build(BuildContext context) {
     return AnimatedCrossFade(
-      firstCurve: Curves.easeInCirc,
+        firstCurve: Curves.easeInCirc,
         secondCurve: Curves.easeInToLinear,
         sizeCurve: Curves.bounceOut,
         firstChild: Container(
           child: InkWell(
-              onTap: (){
+              onTap: () {
                 setState(() {
                   isFirst = !isFirst;
                 });
               },
-              child: Text('改变',style: TextStyle(fontSize: 20),)),
+              child: Text(
+                '改变',
+                style: TextStyle(fontSize: 20),
+              )),
         ),
         secondChild: GridView.count(
             shrinkWrap: true,
@@ -148,9 +187,8 @@ class _AnimWidgetState extends State<AnimWidget> {
                       )),
                     ))
                 .toList()),
-        crossFadeState: isFirst
-            ? CrossFadeState.showSecond
-            : CrossFadeState.showFirst,
+        crossFadeState:
+            isFirst ? CrossFadeState.showSecond : CrossFadeState.showFirst,
         duration: Duration(milliseconds: 1500));
   }
 }

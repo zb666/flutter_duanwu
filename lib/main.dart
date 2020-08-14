@@ -21,13 +21,10 @@ import 'package:flutterduanwu/provider/user_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() async{
-
-   WidgetsFlutterBinding.ensureInitialized();
-
+  WidgetsFlutterBinding.ensureInitialized();
   var loadString = await rootBundle.loadString('assets/json/config_json.json');
   var configMap = json.decode(loadString);
   var configBean = EnvConfig.fromJson(configMap);
-
   GlobalInit.init()
     .then((value) => runApp(MultiProvider(providers: [
           ChangeNotifierProvider(create: (_) => UserProvider.instance),
@@ -59,9 +56,7 @@ void main() async{
 }
 
 void startSpawn() async{
-
   final receive = ReceivePort();
-
   Isolate isolate = await Isolate.spawn(runTimer, receive.sendPort);
   receive.listen((message) {
     //ReceivePort将自己的发射器发送出去，让对方可以拿着自己的发射器发送消息，
@@ -116,10 +111,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      theme: Theme.of(context),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
       routes: {
         ExpandPage.ROUTE_NAME: (_) => ExpandPage(),
@@ -161,6 +153,7 @@ class _MyHomePageState extends State<MyHomePage>
         icon: Icon(CupertinoIcons.shopping_cart), title: Text('购物车')),
     BottomNavigationBarItem(
         icon: Icon(CupertinoIcons.profile_circled), title: Text('会员中心')),
+
     BottomNavigationBarItem(
         icon: Icon(CupertinoIcons.reply), title: Text('选择器')),
     BottomNavigationBarItem(
@@ -178,11 +171,16 @@ class _MyHomePageState extends State<MyHomePage>
 
   @override
   void initState() {
+    Expando();
     super.initState();
+
   }
 
   @override
   Widget build(BuildContext context) {
+    setState(() {
+
+    });
     var currentIndex = Provider.of<CurrentIndexProvider>(context).currentIndex;
     print('curIndex: $currentIndex');
     return Scaffold(
@@ -204,3 +202,17 @@ class _MyHomePageState extends State<MyHomePage>
         .changeIndex(value);
   }
 }
+
+
+class ThemeBean{
+
+  final String name;
+
+  ThemeBean.name({@required this.name});
+
+  ThemeBean copyWith({String passedName}){ //重新构造出一个属性
+    return ThemeBean.name(name: name);
+  }
+
+}
+

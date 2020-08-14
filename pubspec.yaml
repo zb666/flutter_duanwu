@@ -45,9 +45,17 @@ dependencies:
   rxdart: ^0.24.1
   flutter_svg: ^0.17.4
 
+#  device_preview:
+#  shared_preferences_fde:
+#    git:
+#      url: https://github.com/google/flutter-desktop-embedding/
+#      path: plugins/flutter_plugins/shared_preferences_fde
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -48,6 +48,9 @@ class _InheritedWidgetTestRouteState extends State<InheritedWidgetTestRoute> {
 
   @override
   Widget build(BuildContext context) {
+    setState(() {
+
+    });
     return Center(
       child: ShareDataWidget(
           count: count,
