@@ -33,7 +33,6 @@ class _RotateTransformState extends State<RotateTransform> {
             min: 0,
             max: 100,
             value: _curValue,
-            useV2Slider: true,
             label: 'CurValue: $_curValue',
             onChanged: (value) {
               setState(() {

@@ -43,7 +43,11 @@ dependencies:
   json_annotation: ^3.0.1
   flutter_bloc: ^4.0.1
   rxdart: ^0.24.1
-  flutter_svg: ^0.17.4
+  flutter_svg: ^0.18.0
+  network_to_file_image: ^2.3.2
+  path_provider: ^1.6.11
+  cached_network_image: ^2.2.0+1
+  flutter_cache_manager: ^1.4.1
 
 #  device_preview:
 #  shared_preferences_fde:

@@ -1,7 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutterduanwu/constant/assets.dart';
 import 'package:flutterduanwu/pages/common/common_image.dart';
@@ -51,16 +55,29 @@ class _HomePageState extends State<HomePage>
     var formData = {'lon': '115.02932', 'lat': '35.76189'};
     return Scaffold(
       appBar: AppBar(
-          title: Text('百姓生活'),
+          title: InkWell(
+              onTap: () {
+                loadFile();
+              },
+              child: Text('百姓生活')),
           backgroundColor: Theme.of(context).highlightColor),
       body: ListView(
         shrinkWrap: true,
         children: [
+          Image(
+              image: CachedNetworkImageProvider(
+                  'http://img3.dian.so/lhc/2019/11/13/1080w_2244h_DF87D1573635417.png',
+              )),
+          Container(
+              height: 500,
+              width: double.infinity,
+              child: Image.network(
+                  'http://img3.dian.so/lhc/2019/11/13/1080w_2244h_DF87D1573635417.png')),
           Chip(
-              label: Text('Label 文字'),
-              backgroundColor: Colors.cyan,
-              avatar: Icon(Icons.clear, color: Colors.black12),
-              labelPadding: EdgeInsets.fromLTRB(2.0, 0.0, 2.0, 0.0),
+            label: Text('Label 文字'),
+            backgroundColor: Colors.cyan,
+            avatar: Icon(Icons.clear, color: Colors.black12),
+            labelPadding: EdgeInsets.fromLTRB(2.0, 0.0, 2.0, 0.0),
           ),
           AspectRatio(
               aspectRatio: 16 / 9,
@@ -123,8 +140,13 @@ class _HomePageState extends State<HomePage>
     );
   }
 
+  var cachedUrl =
+      "http://img3.dian.so/lhc/2019/11/13/1080w_2244h_DF87D1573635417.png";
+
   @override
   bool get wantKeepAlive => true;
+
+  void loadFile() async {}
 }
 
 class AnimWidget extends StatefulWidget {

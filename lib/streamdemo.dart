@@ -1,6 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:flutterduanwu/service/goods_provider.dart';
 
-void main() {
+void main()  async{
 //  var stream = Stream<String>.fromFuture(getData());
 ////
 ////  stream.listen((event) {
@@ -16,9 +17,6 @@ void main() {
 ////    print('stream period: $event');
 ////  });
 
-     GoodsItemProvider().addListener(() {
-
-     });
 
 }
 
