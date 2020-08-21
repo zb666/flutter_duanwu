@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:isolate';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutterduanwu/env/env_config.dart';
 import 'package:flutterduanwu/init/init_helper.dart';
@@ -21,6 +22,7 @@ import 'package:flutterduanwu/provider/user_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() async{
+
   WidgetsFlutterBinding.ensureInitialized();
   var loadString = await rootBundle.loadString('assets/json/config_json.json');
   var configMap = json.decode(loadString);
@@ -161,7 +163,6 @@ class _MyHomePageState extends State<MyHomePage>
   ];
 
   final _pageList = [
-    HomePage(),
     MinePage(),
     CarCategoryPage(),
     MinePage(),
