@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutterduanwu/demo/demo_widget.dart';
 import 'package:flutterduanwu/main.dart';
 
 void main() {
@@ -18,10 +20,26 @@ void main() {
 //
 //          }));
 
+  runApp(
+      MaterialApp(home: DemoHomeWidget(),
+  ));
+
   testCallback(() {
     print('函数调用');
-  }, (inputSource)=>inputSource.length,source: "修改的值");
+  }, (inputSource) => inputSource.length, source: "修改的值");
 
+  getNumbers(10).listen((event) {
+    print('value: $event');
+  });
+
+}
+
+Stream<int> getNumbers(int number) async* {
+  for (int i = 0; i < number; i++) {
+    await Future.delayed(Duration(seconds: 3));
+    yield i;
+  }
+  print('end...');
 }
 
 typedef IntCallBack = int Function(String inputSource);

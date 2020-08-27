@@ -34,7 +34,6 @@ void main() async{
           ChangeNotifierProvider(create: (_) => CounterModelProvider.instance),
           ChangeNotifierProvider(create: (_) => CommonModifyProvider.instance),
         ], child: MyApp())));
-
   [1, 2, 3, 4, 5, 3, 2].forEach((element) {
     var errorMsg = getMemberTips(element);
     print(errorMsg);
